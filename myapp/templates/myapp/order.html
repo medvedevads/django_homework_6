@@ -1,0 +1,29 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}Список товаров{% endblock %}
+
+{% block content %}
+ <h2>Заказы клиента {{ customer.name }} </h2>
+    {% for order in orders %}
+        <h4> Номер заказа {{ order.id }} </h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Товар</th>
+                        <th>Цена</th>
+                    </tr>
+                </thead>
+            {% for product in order.products.all %}
+                <tbody>
+                    <tr>
+                        <td> {{ forloop.counter }} </td>
+                        <td> {{ product.name }} </td>
+                        <td> {{ product.price }} </td>
+                    </tr>
+            {% endfor%}
+                </tbody>
+            </table>
+            <p> Сумма: {{ order.total_price }} </p>
+    {% endfor %}
+{% endblock %}

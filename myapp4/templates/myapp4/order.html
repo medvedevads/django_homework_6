@@ -1,0 +1,31 @@
+{% extends 'myapp/base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+    <h2>Текущие данные</h2>
+    <div>Наименование: {{ product.name }} </div>
+    <div>Описание: {{ product.description }} </div>
+    <div>Цена: {{ product.price }} </div>
+    <div>Количество: {{ product.quantity }} </div>
+
+<div>
+    {% if product.image %}
+         <img src="{{ product.image.url }}" alt="Изображение">
+
+    {% else %}
+        <p>Изображение не загружено</p>
+    {% endif %}
+</div>
+
+    <h2>{{ title }}</h2>
+    {% if form %}
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Отправить">
+        </form>
+    {% else %}
+        <h3>В переданном контексте формы не обнаружено</h3>
+    {% endif %}
+{% endblock %}
